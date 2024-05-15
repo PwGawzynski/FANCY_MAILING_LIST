@@ -1,4 +1,4 @@
 output "aws_s3_bucket" {
   description = "Used s3 bucket name"
-  value = aws_s3_bucket.mailing_list_bucket.bucket
+  value       = aws_s3_bucket.mailing_list_bucket.bucket
 }
