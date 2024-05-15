@@ -11,5 +11,8 @@ terraform {
 
 module "aws_s3_bucket" {
   source = "./modules/aws_s3_bucket"
+}
 
+module "s3_lambda_listener" {
+  source = "./modules/s3_lambda_listener"
 }
