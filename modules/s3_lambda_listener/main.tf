@@ -1,4 +1,4 @@
-module "aws_s3_bucket" {
+module "shared_bucket" {
     source = "../aws_s3_bucket"
 }
 
@@ -126,12 +126,12 @@ resource "aws_lambda_permission" "allow_lambda_put_post" {
   action = "lambda:InvokeFunction"
   function_name = aws_lambda_function.s3_lambda_listener_function.function_name
   principal = "s3.amazonaws.com"
-  source_arn = "arn:aws:s3:::${module.aws_s3_bucket.mailing_list_bucket.id}"
+  source_arn = "arn:aws:s3:::${module.shared_bucket.bucket_id}"
 }
 
 
 resource "aws_s3_bucket_notification" "on_put_trigger_lambda" {
-  bucket = module.aws_s3_bucket.mailing_list_bucket.id
+  bucket = module.shared_bucket.bucket_id
   lambda_function {
     lambda_function_arn = aws_lambda_function.s3_lambda_listener_function.arn
     events = [ "s3:ObjectCreated:Put", "s3:ObjectCreated:Post" ]
