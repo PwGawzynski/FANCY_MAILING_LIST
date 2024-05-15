@@ -16,3 +16,7 @@ module "aws_s3_bucket" {
 module "s3_lambda_listener" {
   source = "./modules/s3_lambda_listener"
 }
+
+module "presigned_url_lambda" {
+  source = "./modules/presigned_url_lambda"
+}
