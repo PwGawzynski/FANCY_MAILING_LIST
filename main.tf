@@ -1,14 +1,15 @@
-resource "aws_s3_bucket" "mailing_list_bucket" {
-  bucket = var.bucket_name
-
-  tags = {
-    Name        = "Mailing list bucket"
-    Environment = "Dev"
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.49"
+    }
   }
+ 
+  required_version = ">= 1.8.3"
 }
 
-resource "aws_s3_object" "mailing_lists" {
-  bucket = "${aws_s3_bucket.mailing_list_bucket.id}"
-  key = "mailing_lists"
-}
+module "aws_s3_bucket" {
+  source = "./modules/aws_s3_bucket"
 
+}

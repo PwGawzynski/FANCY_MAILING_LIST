@@ -1,4 +1,4 @@
-variable "bucket_name" {
-    type = string
-    default = "mailinglistbucketpwgawzynski"
+variable "region" {
+  default = "us-east-1"
+  type = string
 }
