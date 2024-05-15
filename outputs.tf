@@ -6,3 +6,7 @@ output "s3_lambda_listener" {
   description = "S3 Lambda listener module outputs"
   value = module.s3_lambda_listener
 }
+output "presigned_url_lambda" {
+  description = "Lambda for creating presigned url"
+  value = module.presigned_url_lambda
+}
