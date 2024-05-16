@@ -62,10 +62,12 @@ resource "aws_iam_policy" "s3_lambda_presigned_url_policy" {
         {
             "Effect": "Allow",
             "Action": [
-                "s3:PutObject",
-                "s3:GetObject"
+                "s3:ListObjects",
+                "s3:GetObject",
+                "s3:GetObjectVersion",
+                "s3:PutObject"
             ],
-            "Resource": "${module.shared_bucket.bucket_arn}"
+            "Resource": "${module.shared_bucket.bucket_arn}/*"
         }
     ]
 }
@@ -89,6 +91,7 @@ resource "aws_lambda_function" "presigned_url_generator_function" {
   role = aws_iam_role.presigned_url_generator_role.arn
   handler = "lambda_function.lambda_handler"
   runtime = "python3.12"
+  source_code_hash = filebase64sha256("${path.module}/lambda_code/lambda_code.zip")
   depends_on = [ aws_iam_role_policy_attachment.lambda_logs ]
 }
 
@@ -96,3 +99,4 @@ resource "aws_lambda_function_url" "public_url" {
   function_name      = aws_lambda_function.presigned_url_generator_function.function_name
   authorization_type = "NONE"
 }
+
