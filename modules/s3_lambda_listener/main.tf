@@ -119,6 +119,7 @@ resource "aws_lambda_function" "s3_lambda_listener_function" {
   role = aws_iam_role.s3_lambda_listener_role.arn
   handler = "lambda_function.lambda_handler"
   runtime = "python3.12"
+  source_code_hash = filebase64sha256("${path.module}/s3_lambda_listener/s3_lambda_listener.zip")
   depends_on = [ aws_iam_role_policy_attachment.lambda_logs ]
 }
 
