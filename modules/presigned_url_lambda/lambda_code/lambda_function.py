@@ -8,7 +8,7 @@ def lambda_handler(event, context):
         
         s3_client = boto3.client('s3')
         try:
-            response = s3_client.generate_presigned_post('pwgawzynskisesmailing',
+            response = s3_client.generate_presigned_post('mailinglistbucketpwgawzynski',
                                                          f'mailing_lists/{id}.json',
                                                          Fields={"Content-Type": "multipart/form-data"},
                                                          ExpiresIn=600)
