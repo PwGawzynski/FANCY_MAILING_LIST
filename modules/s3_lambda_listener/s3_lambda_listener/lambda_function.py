@@ -6,7 +6,7 @@ from verification import reduce_to_verified, is_mailer_verified
 from init import MAX_EMAIL_COUNT, ExecutionLogger, logger, ses_client, s3_client
 from validation import is_validable, is_item_validable
 
-BUCKET_NAME = 'pwgawzynskisesmailing'
+BUCKET_NAME = 'mailinglistbucketpwgawzynski'
 SENDER_NAME = 'kontakt@pwgawzynski.pl'
 
 def lambda_handler(event, context):
