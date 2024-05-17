@@ -1,3 +1,4 @@
+import os
 import json
 import boto3
 from typing import Literal, Dict, Any
@@ -6,8 +7,8 @@ from verification import reduce_to_verified, is_mailer_verified
 from init import MAX_EMAIL_COUNT, ExecutionLogger, logger, ses_client, s3_client
 from validation import is_validable, is_item_validable
 
-BUCKET_NAME = 'mailinglistbucketpwgawzynski'
-SENDER_NAME = 'kontakt@pwgawzynski.pl'
+BUCKET_NAME = os.getenv('BUCKET_NAME')
+SENDER_NAME = os.getenv('SENDER_MAIL')
 
 def lambda_handler(event, context):
     # dewnloads file name from event
@@ -44,13 +45,13 @@ def lambda_handler(event, context):
             continue
         
         response = ses_client.send_email(
-                Source=SENDER_NAME,  # Replace with the sender's email address
+                Source=SENDER_NAME,  
                 Destination={
-                    'ToAddresses': [item['to']]  # Replace with the recipient's email address
+                    'ToAddresses': [item['to']]  
                 },
                 Message={
                     'Subject': {
-                        'Data': item['subject'],  # Replace with the email subject
+                        'Data': item['subject'],  
                     },
                     'Body': {
                         'Text': {
